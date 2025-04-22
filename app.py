@@ -2,11 +2,14 @@ import streamlit as st
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
 import numpy as np
+import gdown
+import os
 
-# Load the trained model
-model = tf.keras.models.load_model("dogclassification.h5")
+model_path = "dogclassification.h5"
+if not os.path.exists(model_path):
+    gdown.download("https://drive.google.com/uc?id=1p_7tKpD1bkv7rrh08lKYjbXOFc_jAniL", model_path, quiet=False)
 
-# Define class names
+model = tf.keras.models.load_model(model_path)
 class_names = {
         "0": "Afghan",
         "1": "African Wild Dog",
